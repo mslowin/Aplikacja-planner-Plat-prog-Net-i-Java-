@@ -1,1 +1,1 @@
-# Aplikacja-mobilna-Plat-prog-Net-i-Java
+# Aplikacja-planner-Plat-prog-Net-i-Java
