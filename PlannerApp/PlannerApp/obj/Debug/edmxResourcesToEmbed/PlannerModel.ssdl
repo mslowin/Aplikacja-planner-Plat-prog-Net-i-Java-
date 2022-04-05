@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PlanerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Profiles">
+    <Key>
+      <PropertyRef Name="profile_id" />
+    </Key>
+    <Property Name="profile_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="profile_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="profile_surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="profile_date_of_birth" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tasks">
+    <Key>
+      <PropertyRef Name="task_id" />
+    </Key>
+    <Property Name="task_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="profile_id" Type="int" Nullable="false" />
+    <Property Name="task_title" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="task_description" Type="nvarchar(max)" />
+    <Property Name="task_date" Type="date" Nullable="false" />
+    <Property Name="task_time_start" Type="time" Precision="7" />
+    <Property Name="task_time_end" Type="time" Precision="7" />
+  </EntityType>
+  <Association Name="FK_Tasks_ToProfile">
+    <End Role="Profiles" Type="Self.Profiles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profiles">
+        <PropertyRef Name="profile_id" />
+      </Principal>
+      <Dependent Role="Tasks">
+        <PropertyRef Name="profile_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PlanerModelStoreContainer">
+    <EntitySet Name="Profiles" EntityType="Self.Profiles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Tasks_ToProfile" Association="Self.FK_Tasks_ToProfile">
+      <End Role="Profiles" EntitySet="Profiles" />
+      <End Role="Tasks" EntitySet="Tasks" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

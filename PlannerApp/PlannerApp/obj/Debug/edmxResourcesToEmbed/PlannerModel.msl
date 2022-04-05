@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PlanerModelStoreContainer" CdmEntityContainer="PlanerEntities">
+    <EntitySetMapping Name="Profiles">
+      <EntityTypeMapping TypeName="PlanerModel.Profile">
+        <MappingFragment StoreEntitySet="Profiles">
+          <ScalarProperty Name="profile_id" ColumnName="profile_id" />
+          <ScalarProperty Name="profile_name" ColumnName="profile_name" />
+          <ScalarProperty Name="profile_surname" ColumnName="profile_surname" />
+          <ScalarProperty Name="profile_date_of_birth" ColumnName="profile_date_of_birth" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tasks">
+      <EntityTypeMapping TypeName="PlanerModel.Task">
+        <MappingFragment StoreEntitySet="Tasks">
+          <ScalarProperty Name="task_id" ColumnName="task_id" />
+          <ScalarProperty Name="profile_id" ColumnName="profile_id" />
+          <ScalarProperty Name="task_title" ColumnName="task_title" />
+          <ScalarProperty Name="task_description" ColumnName="task_description" />
+          <ScalarProperty Name="task_date" ColumnName="task_date" />
+          <ScalarProperty Name="task_time_start" ColumnName="task_time_start" />
+          <ScalarProperty Name="task_time_end" ColumnName="task_time_end" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

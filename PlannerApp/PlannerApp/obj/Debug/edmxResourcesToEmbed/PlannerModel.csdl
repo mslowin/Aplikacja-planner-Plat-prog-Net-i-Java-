@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PlanerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Profile">
+    <Key>
+      <PropertyRef Name="profile_id" />
+    </Key>
+    <Property Name="profile_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="profile_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="profile_surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="profile_date_of_birth" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Tasks" Relationship="Self.FK_Tasks_ToProfile" FromRole="Profiles" ToRole="Tasks" />
+  </EntityType>
+  <EntityType Name="Task">
+    <Key>
+      <PropertyRef Name="task_id" />
+    </Key>
+    <Property Name="task_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="profile_id" Type="Int32" Nullable="false" />
+    <Property Name="task_title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="task_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="task_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="task_time_start" Type="Time" Precision="7" />
+    <Property Name="task_time_end" Type="Time" Precision="7" />
+    <NavigationProperty Name="Profile" Relationship="Self.FK_Tasks_ToProfile" FromRole="Tasks" ToRole="Profiles" />
+  </EntityType>
+  <Association Name="FK_Tasks_ToProfile">
+    <End Role="Profiles" Type="Self.Profile" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Tasks" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profiles">
+        <PropertyRef Name="profile_id" />
+      </Principal>
+      <Dependent Role="Tasks">
+        <PropertyRef Name="profile_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PlanerEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Profiles" EntityType="Self.Profile" />
+    <EntitySet Name="Tasks" EntityType="Self.Task" />
+    <AssociationSet Name="FK_Tasks_ToProfile" Association="Self.FK_Tasks_ToProfile">
+      <End Role="Profiles" EntitySet="Profiles" />
+      <End Role="Tasks" EntitySet="Tasks" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
