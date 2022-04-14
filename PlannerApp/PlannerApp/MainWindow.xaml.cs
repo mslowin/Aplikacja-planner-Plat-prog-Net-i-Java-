@@ -12,7 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Data;                  //do wpisywania rzeczy do bazy danych
+using System.Data;
+using System.Data.SqlClient;                  //do wpisywania rzeczy do bazy danych
+using System.Configuration;
 
 namespace PlannerApp
 {
@@ -24,27 +26,57 @@ namespace PlannerApp
         public MainWindow()
         {
             InitializeComponent();
+            //bindDataGridProfiles();
+            bindDataGridTasks();
 
-            PlanerEntities profiles_db = new PlanerEntities();
-
-            var profiles = from d in profiles_db.Profiles
-                           select d;
-
-            foreach (var item in profiles)
-            {
-                Console.WriteLine(item.profile_id);
-                Console.WriteLine(item.profile_name);
-                Console.WriteLine(item.profile_surname);
-                Console.WriteLine(item.profile_date_of_birth);
-            }    
         }
+
+        private void bindDataGridTasks()
+        {
+            SqlConnection con = new SqlConnection();
+            //con.ConnectionString = ConfigurationManager.ConnectionStrings["PlanerEntities"].ConnectionString;
+            //con.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "select * from [Tasks]";
+            cmd.Connection = con;
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable("Tasks");
+            //da.Fill(dt);
+            DataGridTasks.ItemsSource = dt.DefaultView;
+        }
+
+        //private void bindDataGridProfiles()
+        //{
+        //    SqlConnection con = new SqlConnection();
+        //    con.ConnectionString = ConfigurationManager.ConnectionStrings["PlanerEntities"].ConnectionString;
+        //    con.Open();
+        //    SqlCommand cmd = new SqlCommand();
+        //    cmd.CommandText = "select * from [Profiles]";
+        //    cmd.Connection = con;
+        //    SqlDataAdapter da = new SqlDataAdapter(cmd);
+        //    DataTable dt = new DataTable("Profiles");
+        //    da.Fill(dt);
+        //    DataGridProfiles.ItemsSource = dt.DefaultView;
+        //}
 
         private void DodajZadanie_Click(object sender, RoutedEventArgs e)
         {
-            Text1.Text = "Nowe zadanie";
 
             NewTaskWindow window2 = new NewTaskWindow();
             window2.Show();
+
+
+
+            //var profiles = from d in profiles_db.Profiles
+            //               select d;
+
+            //foreach (var item in profiles)
+            //{
+            //    Console.WriteLine(item.profile_id);
+            //    Console.WriteLine(item.profile_name);
+            //    Console.WriteLine(item.profile_surname);
+            //    Console.WriteLine(item.profile_date_of_birth);
+            //}
         }
     }
 }

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Data;                  //do wpisywania rzeczy do bazy danych
 
 namespace PlannerApp
 {
@@ -22,6 +23,21 @@ namespace PlannerApp
         public NewTaskWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            PlanerEntities tasks_db = new PlanerEntities();
+
+            
+
+            var tasks = from d in tasks_db.Tasks
+                        select d;
+
+            foreach (var item in tasks)
+            {
+                item.task_title = NewTaskText1.Text;
+            }
         }
     }
 }
