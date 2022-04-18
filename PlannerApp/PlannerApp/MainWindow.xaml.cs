@@ -23,60 +23,39 @@ namespace PlannerApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        public List<Task> MyTasks { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
-            //bindDataGridProfiles();
-            bindDataGridTasks();
+            WyswietlNazweProfilu();
 
+            //Wyświetlenie danych na datagrid:
+            using (PlanerEntities _context = new PlanerEntities())
+            {
+                MyTasks = _context.Tasks.ToList();
+            }
+            DataGridTasks.ItemsSource = MyTasks;
         }
-
-        private void bindDataGridTasks()
-        {
-            SqlConnection con = new SqlConnection();
-            //con.ConnectionString = ConfigurationManager.ConnectionStrings["PlanerEntities"].ConnectionString;
-            //con.Open();
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = "select * from [Tasks]";
-            cmd.Connection = con;
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable("Tasks");
-            //da.Fill(dt);
-            DataGridTasks.ItemsSource = dt.DefaultView;
-        }
-
-        //private void bindDataGridProfiles()
-        //{
-        //    SqlConnection con = new SqlConnection();
-        //    con.ConnectionString = ConfigurationManager.ConnectionStrings["PlanerEntities"].ConnectionString;
-        //    con.Open();
-        //    SqlCommand cmd = new SqlCommand();
-        //    cmd.CommandText = "select * from [Profiles]";
-        //    cmd.Connection = con;
-        //    SqlDataAdapter da = new SqlDataAdapter(cmd);
-        //    DataTable dt = new DataTable("Profiles");
-        //    da.Fill(dt);
-        //    DataGridProfiles.ItemsSource = dt.DefaultView;
-        //}
 
         private void DodajZadanie_Click(object sender, RoutedEventArgs e)
         {
-
             NewTaskWindow window2 = new NewTaskWindow();
+            window2.Owner = this;
             window2.Show();
+        }
 
+        private void ZmienProfil_Click(object sender, RoutedEventArgs e)
+        {
+            NewProfileWindow window3 = new NewProfileWindow();
+            window3.Owner = this;
+            window3.Show();
+        }
 
-
-            //var profiles = from d in profiles_db.Profiles
-            //               select d;
-
-            //foreach (var item in profiles)
-            //{
-            //    Console.WriteLine(item.profile_id);
-            //    Console.WriteLine(item.profile_name);
-            //    Console.WriteLine(item.profile_surname);
-            //    Console.WriteLine(item.profile_date_of_birth);
-            //}
+        private void WyswietlNazweProfilu()
+        {
+            PlanerEntities nazwa_profilu = new PlanerEntities();
+            WyswietlanaNazwaProfilu.Text = "HELLO!";
         }
     }
 }

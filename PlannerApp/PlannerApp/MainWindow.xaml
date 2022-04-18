@@ -5,27 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PlannerApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="510" Width="800">
-    <Grid>
-        <Button Name="DodajZadanie" Content="Dodaj zadanie" HorizontalAlignment="Center" Margin="0,62,0,317" VerticalAlignment="Center" Width="96" Click="DodajZadanie_Click" Height="40" Background="LightBlue"/>
+        Title="MainWindow" Height="694.5" Width="1004">
+    <Grid Background="Khaki">
+        <!--Wybor profilu-->
+        <TextBlock Name="WyswietlanaNazwaProfilu" Background="White" Padding="0,15,0,0" HorizontalAlignment="Left" Height="52" TextAlignment="Center"  Margin="39,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button Name="ZmienProfil" Content="Wybierz inny profil" HorizontalAlignment="Left" Margin="164,39,0,0" VerticalAlignment="Top" Width="126" Click="ZmienProfil_Click" Height="52" Background="LightBlue"/>
 
-        <!--<DataGrid Name="DataGridProfiles" HorizontalAlignment="Center" Height="135" Margin="0,175,0,0" VerticalAlignment="Top" Width="495">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding profile_id}" Header="profile id" Width="120"/>
-                <DataGridTextColumn Binding="{Binding profile_name}" Header="profile name" Width="120"/>
-                <DataGridTextColumn Binding="{Binding profile_surname}" Header="profile surname" Width="120"/>
-                <DataGridTextColumn Binding="{Binding profile_date_of_birth}" Header="profile date of birth" Width="135"/>
-            </DataGrid.Columns>
-        </DataGrid>-->
 
-        <DataGrid Name="DataGridTasks" HorizontalAlignment="Center" Height="135" Margin="0,175,0,0" VerticalAlignment="Top" Width="617">
+        <Button Name="DodajZadanie" Content="Dodaj zadanie" HorizontalAlignment="Left" Margin="371,154,0,0" VerticalAlignment="Top" Width="269" Click="DodajZadanie_Click" Height="48" Background="LightBlue"/>
+        <!--Wyswietlenie taskow-->
+        <DataGrid Name="DataGridTasks" HorizontalAlignment="Center" Height="314" Margin="92,244,79,105" VerticalAlignment="Center" Width="825">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding task_id}" Header="task Id" Width="50"/>
-                <DataGridTextColumn Binding="{Binding task_title}" Header="task title" Width="100"/>
-                <DataGridTextColumn Binding="{Binding task_description}" Header="task description" Width="175"/>
+                <DataGridTextColumn Binding="{Binding task_id}" Header="task Id" Width="60"/>
+                <DataGridTextColumn Binding="{Binding task_title}" Header="task title" Width="160"/>
+                <DataGridTextColumn Binding="{Binding task_description}" Header="task description" Width="300"/>
                 <DataGridTextColumn Binding="{Binding task_date}" Header="task date" Width="100"/>
                 <DataGridTextColumn Binding="{Binding task_time_start}" Header="task time start" Width="100"/>
-                <DataGridTextColumn Binding="{Binding task_time_end}" Header="task time end"/>
+                <DataGridTextColumn Binding="{Binding task_time_end}" Header="task time end" Width="100"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
