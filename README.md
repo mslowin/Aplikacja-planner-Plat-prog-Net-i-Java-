@@ -6,3 +6,4 @@
 *3* obsługa wyjątków <br />
 *4* odświerzanie w jakiś sposób okien, zamiast odpalania ich na nowo <br />
 *5* dodać na przykład działający zegar albo pogodę z API
+*6* zamienic DataGrid tasków na jakąś listę, gdzie będzie można je modyfikowąć, albo usuwać
