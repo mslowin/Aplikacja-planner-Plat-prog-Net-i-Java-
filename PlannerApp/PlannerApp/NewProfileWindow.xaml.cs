@@ -75,12 +75,22 @@ namespace PlannerApp
             }
         }
 
-        private void ComboBoxProfiles_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void ComboBoxProfiles_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int id;
             //string id = ComboBoxProfiles.SelectedValue.ToString();
             bool result = int.TryParse(ComboBoxProfiles.SelectedValue.ToString(), out id);
             Test.Text = "Id wybranego profilu to: " + id.ToString() + "\nTeraz trzeba według tego id przefiltrowac taski";
+
+            MyVariables.SelectedProfile_ID = id.ToString();
+        }
+
+        private void Wybrany_Profil_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow newWindow = new MainWindow();
+            Application.Current.MainWindow = newWindow;
+            newWindow.Show();
+            this.Close();
         }
     }
 }

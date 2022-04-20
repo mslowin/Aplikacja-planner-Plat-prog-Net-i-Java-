@@ -32,8 +32,9 @@
         <TextBox Name="NewProfileText2" HorizontalAlignment="Left" Height="24" Margin="776,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox Name="NewProfileText3" HorizontalAlignment="Left" Height="24" Margin="776,229,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
-        <Button Content="Zatwierdź" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="714,357,0,0" Width="94" Background="LightGreen" Height="42" Click="Button_Click"/>
-        <TextBlock Name="Test"  Background="White" HorizontalAlignment="Left" Margin="105,330,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="85" Width="315"/>
+        <Button Content="Zatwierdź" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="716,405,0,0" Width="94" Background="LightGreen" Height="42" Click="Button_Click"/>
+        <TextBlock Name="Test"  Background="White" HorizontalAlignment="Left" Margin="104,275,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="85" Width="315"/>
+        <Button Content="Zatwierdź" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="192,405,0,0" Width="94" Background="LightGreen" Height="42" Click="Wybrany_Profil_Click"/>
 
 
 

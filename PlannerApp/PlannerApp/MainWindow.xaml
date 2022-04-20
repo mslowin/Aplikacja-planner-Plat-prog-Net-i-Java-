@@ -24,5 +24,13 @@
                 <DataGridTextColumn Binding="{Binding task_time_end}" Header="task time end" Width="100"/>
             </DataGrid.Columns>
         </DataGrid>
+
+        <Rectangle Fill="LightBlue" HorizontalAlignment="Left" Height="109" Margin="714,93,0,0" Stroke="Black" VerticalAlignment="Top" Width="247"/>
+        <Image Name="picIcon" HorizontalAlignment="Left" Height="109" Margin="726,93,0,0" VerticalAlignment="Top" Width="100" />
+        <TextBox Name="miasto" TextAlignment="Center" Padding="0,9,0,0" HorizontalAlignment="Left" Height="39" Margin="714,54,0,0" TextWrapping="Wrap" GotKeyboardFocus="TextBox_GotKeyboardFocus" SelectedText="Wybierz miasto..." VerticalAlignment="Top" Width="163"/>
+        <Button Content="Zatwierdź" Background="LightGreen" HorizontalAlignment="Left" Margin="877,54,0,0" VerticalAlignment="Top" Width="84" Height="39" Click="Button_Click"/>
+        <TextBlock Name="temp" Background="LightBlue" Text="Temp" FontSize="25" TextAlignment="Left" HorizontalAlignment="Left" Margin="831,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="121" Height="38"/>
+        <TextBlock Name="opis" Background="LightBlue" FontSize="17" Text="Opis" TextAlignment="Left" HorizontalAlignment="Left" Margin="831,145,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="121" Height="25"/>
+        <TextBlock Name="cisnienie" Background="LightBlue" Text="cisnienie" TextAlignment="Left" HorizontalAlignment="Left" Margin="831,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="121"/>
     </Grid>
 </Window>
