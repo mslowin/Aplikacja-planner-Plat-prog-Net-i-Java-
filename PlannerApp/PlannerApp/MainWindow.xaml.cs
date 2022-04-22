@@ -122,9 +122,12 @@ namespace PlannerApp
             int i = 0;
             foreach (var item in tasks)
             {
-                string time = item.task_time_start.ToString().Remove(5, 3) + " - " + item.task_time_end.ToString().Remove(5, 3);
-                TasksList.Add(new TaskMenager() { TaskTitle = item.task_title, TaskDate = item.task_date.ToString().Remove(10, 9), TaskTime = time, TaskID = item.task_id, enumNumber = i });
-                i++;
+                if (item.profile_id.ToString() == MyVariables.SelectedProfile_ID)
+                {
+                    string time = item.task_time_start.ToString().Remove(5, 3) + " - " + item.task_time_end.ToString().Remove(5, 3);
+                    TasksList.Add(new TaskMenager() { TaskTitle = item.task_title, TaskDate = item.task_date.ToString().Remove(10, 9), TaskTime = time, TaskID = item.task_id, enumNumber = i });
+                    i++;
+                }
             }
             //------------------------------------------------------------------------------------------------------
 

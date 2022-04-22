@@ -22,6 +22,42 @@ namespace PlannerApp
         public EditTaskWindow()
         {
             InitializeComponent();
+            WypiszDane();
+        }
+
+        private void WypiszDane()
+        {
+            List<TaskEditor> TasksList = new List<TaskEditor>();
+            PlanerEntities tasks_db = new PlanerEntities();
+
+            var tasks = from d in tasks_db.Tasks
+                        select d;
+
+            int i = 0;
+            foreach (var item in tasks)
+            {
+                if (item.profile_id.ToString() == MyVariables.SelectedProfile_ID)
+                {
+                    TasksList.Add(new TaskEditor()
+                    {
+                        profileID = item.profile_id,
+                        TaskTitle = item.task_title,
+                        TaskDate = item.task_date,
+                        TaskID = item.task_id,
+                        TaskDescription = item.task_description,
+                        TaskTimeEnd = (TimeSpan)item.task_time_end,
+                        TaskTimeStart = (TimeSpan)item.task_time_start,
+                        enumNumber = i
+                    });
+                    i++;
+                }
+            }
+
+            EditTaskText1.Text = TasksList[MyVariables.TaskEditIndex].TaskTitle;
+            EditTaskText2.Text = TasksList[MyVariables.TaskEditIndex].TaskDate.ToString();
+            EditTaskText3.Text = TasksList[MyVariables.TaskEditIndex].TaskTimeStart.ToString();
+            EditTaskText4.Text = TasksList[MyVariables.TaskEditIndex].TaskTimeEnd.ToString();
+            EditTaskText5.Text = TasksList[MyVariables.TaskEditIndex].TaskDescription;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -35,22 +71,24 @@ namespace PlannerApp
             int i = 0;
             foreach (var item in tasks)
             {
-                TasksList.Add(new TaskEditor()
+                if (item.profile_id.ToString() == MyVariables.SelectedProfile_ID)
                 {
-                    profileID = item.profile_id,
-                    TaskTitle = item.task_title,
-                    TaskDate = item.task_date,
-                    TaskID = item.task_id,
-                    TaskDescription = item.task_description,
-                    TaskTimeEnd = (TimeSpan)item.task_time_end,
-                    TaskTimeStart = (TimeSpan)item.task_time_start,
-                    enumNumber = i
-                });
-                i++;
+                    TasksList.Add(new TaskEditor()
+                    {
+                        profileID = item.profile_id,
+                        TaskTitle = item.task_title,
+                        TaskDate = item.task_date,
+                        TaskID = item.task_id,
+                        TaskDescription = item.task_description,
+                        TaskTimeEnd = (TimeSpan)item.task_time_end,
+                        TaskTimeStart = (TimeSpan)item.task_time_start,
+                        enumNumber = i
+                    });
+                    i++;
+                }
             }
 
             Console.WriteLine(MyVariables.TaskEditIndex);
-            //Tutaj MyVariables.TaskEditIndex = 1
 
             string enteredTitle;
             DateTime enteredDate;
@@ -93,7 +131,7 @@ namespace PlannerApp
                 var std = new Task()
                 {
                     task_id = TasksList[MyVariables.TaskEditIndex].TaskID,
-                    profile_id = TasksList[MyVariables.TaskEditIndex].profileID,                     //Tu trzeba bedzie zmienic w zaleznosci od profilu
+                    profile_id = TasksList[MyVariables.TaskEditIndex].profileID,     //Tu trzeba bedzie zmienic w zaleznosci od profilu
                     task_title = enteredTitle,
                     task_date = enteredDate,
                     task_time_start = enteredTimeStart,

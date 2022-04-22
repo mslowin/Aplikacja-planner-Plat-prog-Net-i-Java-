@@ -34,11 +34,12 @@ namespace PlannerApp
             DateTime enteredDate = DateTime.Parse(NewTaskText2.Text);
             TimeSpan enteredTimeStart = TimeSpan.Parse(NewTaskText3.Text);
             TimeSpan enteredTimeEnd = TimeSpan.Parse(NewTaskText4.Text);
+            int temp_profile_id = Int32.Parse(MyVariables.SelectedProfile_ID);
             using (var context = new PlanerEntities())
             {
                 var std = new Task()
                 {
-                    profile_id = 3,                     //Tu trzeba bedzie zmienic w zaleznosci od profilu
+                    profile_id = temp_profile_id,                     //Tu trzeba bedzie zmienic w zaleznosci od profilu
                     task_title = NewTaskText1.Text,
                     task_date = enteredDate,
                     task_time_start = enteredTimeStart,
