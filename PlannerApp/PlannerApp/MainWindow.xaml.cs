@@ -39,11 +39,12 @@ namespace PlannerApp
             PlanerEntities tasks_db = new PlanerEntities();
 
             var tasks = from d in tasks_db.Tasks
-                           select d;
+                        select d;
 
             foreach (var item in tasks)
             {
-                TasksList.Add(new TaskMenager() { TaskTitle = item.task_title });
+                string time = item.task_time_start.ToString().Remove(5,3) + " - " + item.task_time_end.ToString().Remove(5,3);
+                TasksList.Add(new TaskMenager() { TaskTitle = item.task_title, TaskDate = item.task_date.ToString().Remove(10,9), TaskTime = time, TaskID = item.task_id });
             }
 
             UserList.ItemsSource = TasksList;
@@ -108,6 +109,38 @@ namespace PlannerApp
             window3.Show();
         }
 
+        // Usuwanie tasków
+        private void removeTask_Click(object sender, RoutedEventArgs e)
+        {
+
+            //-------------------------------------------------------------------pobranie bazy danych do list klas
+            List<TaskMenager> TasksList = new List<TaskMenager>();
+            PlanerEntities tasks_db = new PlanerEntities();
+
+            var tasks = from d in tasks_db.Tasks
+                        select d;
+
+            foreach (var item in tasks)
+            {
+                string time = item.task_time_start.ToString().Remove(5, 3) + " - " + item.task_time_end.ToString().Remove(5, 3);
+                TasksList.Add(new TaskMenager() { TaskTitle = item.task_title, TaskDate = item.task_date.ToString().Remove(10, 9), TaskTime = time, TaskID = item.task_id });
+            }
+            //------------------------------------------------------------------------------------------------------
+
+            using (var context = new PlanerEntities())
+            {
+                var std = new Task()
+                {
+                    task_id = TasksList[0].TaskID
+                };
+                context.Tasks.Attach(std);
+                context.Tasks.Remove(std);
+
+                context.SaveChanges();
+            }
+            
+        }
+
         private void WyswietlNazweProfilu()
         {
             PlanerEntities profiles_db = new PlanerEntities();
@@ -122,8 +155,6 @@ namespace PlannerApp
                     WyswietlanaNazwaProfilu.Text = item.profile_name;
                 }
             }
-
-            //WyswietlanaNazwaProfilu.Text = "HELLO!";
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -135,5 +166,8 @@ namespace PlannerApp
     public class TaskMenager
     {
         public string TaskTitle { get; set; }
+        public string TaskTime { get; set; }
+        public string TaskDate { get; set; }
+        public int TaskID { get; set; }
     }
 }
