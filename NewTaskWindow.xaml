@@ -1,0 +1,26 @@
+﻿<Window x:Class="PlannerApp.NewTaskWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PlannerApp"
+        mc:Ignorable="d"
+        Title="NewTaskWindow" Height="675" Width="942">
+    <Grid Background="Khaki">
+        <TextBlock Padding="0,3,0,0" TextAlignment="Center" HorizontalAlignment="Center" Margin="308,111,516,0" Height="24" TextWrapping="Wrap" Text="Nazwa zadania:" VerticalAlignment="Top" Width="110" Background="LightBlue"/>
+        <TextBlock Padding="0,3,0,0" TextAlignment="Center" HorizontalAlignment="Center" Margin="308,157,516,0" Height="24" TextWrapping="Wrap" Text="Data zadania:" VerticalAlignment="Top" Width="110" Background="LightBlue"/>
+        <TextBlock Padding="0,3,0,0" TextAlignment="Center" HorizontalAlignment="Center" Margin="239,208,603,0" Height="24" TextWrapping="Wrap" Text="Początek:" VerticalAlignment="Top" Width="92" Background="LightBlue"/>
+        <TextBlock Padding="0,3,0,0" TextAlignment="Center" HorizontalAlignment="Center" Margin="492,208,350,0" Height="24" TextWrapping="Wrap" Text="Koniec:" VerticalAlignment="Top" Width="92" Background="LightBlue"/>
+        <TextBlock Padding="0,3,0,0" TextAlignment="Center" HorizontalAlignment="Center" Margin="239,291,603,0" Height="24" TextWrapping="Wrap" Text="Opis zadania:" VerticalAlignment="Top" Width="92" Background="LightBlue"/>
+        <TextBlock Padding="0,6,0,0" TextAlignment="Center" HorizontalAlignment="Center" Height="28" Margin="0,64,0,0" TextWrapping="Wrap" Text="UTWÓRZ NOWE ZADANIE " VerticalAlignment="Top" Width="160" Background="LightBlue"/>
+
+        <TextBox Name="NewTaskText1" HorizontalAlignment="Left" Height="24" Margin="447,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165"/>
+        <TextBox Name="NewTaskText2" HorizontalAlignment="Left" Height="24" Margin="448,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164"/>
+        <TextBox Name="NewTaskText3" HorizontalAlignment="Left" Height="24" Margin="346,208,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+        <TextBox Name="NewTaskText4" HorizontalAlignment="Left" Height="24" Margin="598,208,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+        <TextBox Name="NewTaskText5" HorizontalAlignment="Left" Height="136" Margin="346,291,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="372"/>
+
+        <Button Content="Zatwierdź" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="429,471,0,0" Width="93" Background="LightGreen" Click="Button_Click" Height="42"/>
+
+    </Grid>
+</Window>
