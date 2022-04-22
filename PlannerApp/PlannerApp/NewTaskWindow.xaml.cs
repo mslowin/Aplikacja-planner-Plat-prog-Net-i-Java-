@@ -52,9 +52,9 @@ namespace PlannerApp
             //this.Close();
             
 
-            MainWindow newWindow = new MainWindow();
-            Application.Current.MainWindow = newWindow;
-            newWindow.Show();
+            //MainWindow newWindow = new MainWindow();
+            //Application.Current.MainWindow = newWindow;
+            //newWindow.Show();
             this.Close();
         }
     }

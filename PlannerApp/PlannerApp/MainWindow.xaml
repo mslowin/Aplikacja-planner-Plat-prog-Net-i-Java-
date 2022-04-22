@@ -9,7 +9,7 @@
 
     <Window.Resources>
         <DataTemplate x:Key="UserDataTemplate">
-            <StackPanel Name="TaskList" Orientation="Horizontal" Height="72" HorizontalAlignment="Left" VerticalAlignment="top">
+            <StackPanel Orientation="Horizontal" Height="72" HorizontalAlignment="Left" VerticalAlignment="top">
                 <!--tekst-->
                 <StackPanel Orientation="Horizontal" Width="576" HorizontalAlignment="Left" VerticalAlignment="top">
                     <Border BorderThickness="1" BorderBrush="Black">
@@ -27,12 +27,12 @@
                 <!--Przyciski-->
                 <StackPanel Orientation="Vertical" Width="80" Height="72" HorizontalAlignment="Left" VerticalAlignment="top">
                     <Border BorderThickness="1" BorderBrush="Black">
-                        <Button Click="removeTask_Click" Height="34" Width="78" Background="PaleVioletRed" >
+                        <Button Click="removeTask_Click" Height="34" Width="78" Background="PaleVioletRed" Foreground="PaleVioletRed" Content="{Binding Path=(ItemsControl.AlternationIndex), RelativeSource={RelativeSource TemplatedParent}, StringFormat={}Index is {0}}" >
                             <!--<Image Source="./X_sign.png" ></Image>-->
                         </Button>
                     </Border>
                     <Border BorderThickness="1" BorderBrush="Black">
-                        <Button Height="34" Width="78" Background="Yellow">
+                        <Button Click="editTask_Click" Height="34" Width="78" Background="Yellow" Foreground="yellow" Content="{Binding Path=(ItemsControl.AlternationIndex), RelativeSource={RelativeSource TemplatedParent}, StringFormat={}Index is {0}}">
                             <!--<Image Source="./edit-icon.png"></Image>-->
                         </Button>
                     </Border>
@@ -50,8 +50,8 @@
         <Button Name="DodajZadanie" Content="Dodaj zadanie" HorizontalAlignment="Left" Margin="371,154,0,0" VerticalAlignment="Top" Width="269" Click="DodajZadanie_Click" Height="48" Background="LightBlue"/>
 
         <!--Wyswietlenie taskow-->
-        <ScrollViewer HorizontalAlignment="Left" Background="White" Height="299" Margin="164,244,0,0" VerticalAlignment="Top" Width="684" VerticalScrollBarVisibility="Auto">
-            <ItemsControl x:Name="UserList" ItemTemplate="{StaticResource UserDataTemplate}"/>
+        <ScrollViewer  x:Name="TaskList" HorizontalAlignment="Left" Background="White" Height="299" Margin="164,244,0,0" VerticalAlignment="Top" Width="684" VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="UserList" ItemTemplate="{StaticResource UserDataTemplate}" AlternationCount="9999"/>
         </ScrollViewer>
 
         <Rectangle Fill="LightBlue" HorizontalAlignment="Left" Height="109" Margin="714,93,0,0" Stroke="Black" VerticalAlignment="Top" Width="247"/>

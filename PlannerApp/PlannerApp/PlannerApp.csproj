@@ -68,6 +68,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="EditTaskWindow.xaml.cs">
+      <DependentUpon>EditTaskWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MyVariables.cs" />
     <Compile Include="WeatherInformation.cs" />
     <Compile Include="NewProfileWindow.xaml.cs">
@@ -87,6 +90,10 @@
     <Compile Include="Task.cs">
       <DependentUpon>PlannerModel.tt</DependentUpon>
     </Compile>
+    <Page Include="EditTaskWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

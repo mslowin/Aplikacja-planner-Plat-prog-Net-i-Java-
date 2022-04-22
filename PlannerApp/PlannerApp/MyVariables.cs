@@ -9,5 +9,6 @@ namespace PlannerApp
     class MyVariables
     {
         public static string SelectedProfile_ID = "3";
+        public static int TaskEditIndex;
     }
 }

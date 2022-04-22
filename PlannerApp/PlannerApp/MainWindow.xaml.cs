@@ -34,20 +34,7 @@ namespace PlannerApp
             InitializeComponent();
             WyswietlNazweProfilu();
             getWeather("Wroclaw");
-
-            List<TaskMenager> TasksList = new List<TaskMenager>();
-            PlanerEntities tasks_db = new PlanerEntities();
-
-            var tasks = from d in tasks_db.Tasks
-                        select d;
-
-            foreach (var item in tasks)
-            {
-                string time = item.task_time_start.ToString().Remove(5,3) + " - " + item.task_time_end.ToString().Remove(5,3);
-                TasksList.Add(new TaskMenager() { TaskTitle = item.task_title, TaskDate = item.task_date.ToString().Remove(10,9), TaskTime = time, TaskID = item.task_id });
-            }
-
-            UserList.ItemsSource = TasksList;
+            loadStackPanelData();
 
             //Wyświetlenie danych na datagrid:
             //using (PlanerEntities _context = new PlanerEntities())
@@ -99,19 +86,31 @@ namespace PlannerApp
         {
             NewTaskWindow window2 = new NewTaskWindow();
             window2.Owner = this;
-            window2.Show();
+            window2.ShowDialog();
+
+            loadStackPanelData();
         }
 
         private void ZmienProfil_Click(object sender, RoutedEventArgs e)
         {
             NewProfileWindow window3 = new NewProfileWindow();
             window3.Owner = this;
-            window3.Show();
+            window3.ShowDialog();
+
+            WyswietlNazweProfilu();
+            loadStackPanelData();
         }
 
         // Usuwanie tasków
         private void removeTask_Click(object sender, RoutedEventArgs e)
         {
+            Button clickbtn = sender as Button;
+
+            string index = clickbtn.ToString();
+            index = index.Remove(0, 31);
+
+            int intIndex;
+            intIndex = Int32.Parse(index);
 
             //-------------------------------------------------------------------pobranie bazy danych do list klas
             List<TaskMenager> TasksList = new List<TaskMenager>();
@@ -120,10 +119,12 @@ namespace PlannerApp
             var tasks = from d in tasks_db.Tasks
                         select d;
 
+            int i = 0;
             foreach (var item in tasks)
             {
                 string time = item.task_time_start.ToString().Remove(5, 3) + " - " + item.task_time_end.ToString().Remove(5, 3);
-                TasksList.Add(new TaskMenager() { TaskTitle = item.task_title, TaskDate = item.task_date.ToString().Remove(10, 9), TaskTime = time, TaskID = item.task_id });
+                TasksList.Add(new TaskMenager() { TaskTitle = item.task_title, TaskDate = item.task_date.ToString().Remove(10, 9), TaskTime = time, TaskID = item.task_id, enumNumber = i });
+                i++;
             }
             //------------------------------------------------------------------------------------------------------
 
@@ -131,14 +132,36 @@ namespace PlannerApp
             {
                 var std = new Task()
                 {
-                    task_id = TasksList[0].TaskID
+                    task_id = TasksList[intIndex].TaskID
                 };
                 context.Tasks.Attach(std);
                 context.Tasks.Remove(std);
 
                 context.SaveChanges();
             }
-            
+
+            loadStackPanelData();
+        }
+
+        private void editTask_Click(object sender, RoutedEventArgs e)
+        {
+            Button clickbtn = sender as Button;
+
+            string index = clickbtn.ToString();
+            index = index.Remove(0, 31);
+
+            int intIndex;
+            intIndex = Int32.Parse(index);
+
+            MyVariables.TaskEditIndex = intIndex;
+
+            //Console.WriteLine(MyVariables.TaskEditIndex);
+
+            EditTaskWindow window4 = new EditTaskWindow();
+            window4.Owner = this;
+            window4.ShowDialog();
+
+            loadStackPanelData();
         }
 
         private void WyswietlNazweProfilu()
@@ -159,7 +182,33 @@ namespace PlannerApp
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            getWeather(miasto.Text);
+            string tmp;
+            if (String.IsNullOrEmpty(miasto.Text) || miasto.Text == "Wybierz miasto...")
+                tmp = "Wroclaw";
+            else
+                tmp = miasto.Text;
+
+            getWeather(tmp);
+        }
+
+        private void loadStackPanelData()
+        {
+            List<TaskMenager> TasksList = new List<TaskMenager>();
+            PlanerEntities tasks_db = new PlanerEntities();
+
+            var tasks = from d in tasks_db.Tasks
+                        select d;
+
+            foreach (var item in tasks)
+            {
+                if (item.profile_id.ToString() == MyVariables.SelectedProfile_ID)
+                {
+                    string time = item.task_time_start.ToString().Remove(5, 3) + " - " + item.task_time_end.ToString().Remove(5, 3);
+                    TasksList.Add(new TaskMenager() { TaskTitle = item.task_title, TaskDate = item.task_date.ToString().Remove(10, 9), TaskTime = time, TaskID = item.task_id });
+                }
+            }
+
+            UserList.ItemsSource = TasksList;
         }
     }
 
@@ -169,5 +218,18 @@ namespace PlannerApp
         public string TaskTime { get; set; }
         public string TaskDate { get; set; }
         public int TaskID { get; set; }
+        public int enumNumber { get; set; }
+    }
+
+    public class TaskEditor
+    {
+        public string TaskTitle { get; set; }
+        public TimeSpan TaskTimeStart { get; set; }
+        public TimeSpan TaskTimeEnd { get; set; }
+        public DateTime TaskDate { get; set; }
+        public string TaskDescription { get; set; }
+        public int profileID { get; set; }
+        public int TaskID { get; set; }
+        public int enumNumber { get; set; }
     }
 }
