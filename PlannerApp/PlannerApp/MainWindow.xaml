@@ -6,6 +6,15 @@
         xmlns:local="clr-namespace:PlannerApp"
         mc:Ignorable="d"
         Title="MainWindow" Height="694.5" Width="1004">
+    
+    <Window.Resources>
+        <DataTemplate x:Key="UserDataTemplate">
+            <StackPanel Orientation="Horizontal" Background="White" Width="200">
+                <Label HorizontalAlignment="Center" Content="{Binding TaskTitle}" />
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+
     <Grid Background="Khaki">
         <!--Wybor profilu-->
         <TextBlock Name="WyswietlanaNazwaProfilu" Background="White" Padding="0,15,0,0" HorizontalAlignment="Left" Height="52" TextAlignment="Center"  Margin="39,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
@@ -13,19 +22,13 @@
 
 
         <Button Name="DodajZadanie" Content="Dodaj zadanie" HorizontalAlignment="Left" Margin="371,154,0,0" VerticalAlignment="Top" Width="269" Click="DodajZadanie_Click" Height="48" Background="LightBlue"/>
+       
         <!--Wyswietlenie taskow-->
-        <DataGrid Name="DataGridTasks" HorizontalAlignment="Center" Height="314" Margin="92,244,79,105" VerticalAlignment="Center" Width="825">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding task_id}" Header="task Id" Width="60"/>
-                <DataGridTextColumn Binding="{Binding task_title}" Header="task title" Width="160"/>
-                <DataGridTextColumn Binding="{Binding task_description}" Header="task description" Width="300"/>
-                <DataGridTextColumn Binding="{Binding task_date}" Header="task date" Width="100"/>
-                <DataGridTextColumn Binding="{Binding task_time_start}" Header="task time start" Width="100"/>
-                <DataGridTextColumn Binding="{Binding task_time_end}" Header="task time end" Width="100"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <ScrollViewer HorizontalAlignment="Center" Background="Green" Height="299" Margin="0,248,0,0" VerticalAlignment="Top" Width="441" VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="UserList" ItemTemplate="{StaticResource UserDataTemplate}"/>
+        </ScrollViewer>
 
-        <Rectangle Fill="LightBlue" HorizontalAlignment="Left" Height="109" Margin="714,93,0,0" Stroke="Black" VerticalAlignment="Top" Width="247"/>
+            <Rectangle Fill="LightBlue" HorizontalAlignment="Left" Height="109" Margin="714,93,0,0" Stroke="Black" VerticalAlignment="Top" Width="247"/>
         <Image Name="picIcon" HorizontalAlignment="Left" Height="109" Margin="726,93,0,0" VerticalAlignment="Top" Width="100" />
         <TextBox Name="miasto" TextAlignment="Center" Padding="0,9,0,0" HorizontalAlignment="Left" Height="39" Margin="714,54,0,0" TextWrapping="Wrap" GotKeyboardFocus="TextBox_GotKeyboardFocus" SelectedText="Wybierz miasto..." VerticalAlignment="Top" Width="163"/>
         <Button Content="Zatwierdź" Background="LightGreen" HorizontalAlignment="Left" Margin="877,54,0,0" VerticalAlignment="Top" Width="84" Height="39" Click="Button_Click"/>
@@ -34,3 +37,15 @@
         <TextBlock Name="cisnienie" Background="LightBlue" Text="cisnienie" TextAlignment="Left" HorizontalAlignment="Left" Margin="831,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="121"/>
     </Grid>
 </Window>
+   
+
+<!--<DataGrid Name="DataGridTasks" HorizontalAlignment="Center" Height="314" Margin="92,244,79,105" VerticalAlignment="Center" Width="825">
+    <DataGrid.Columns>
+        <DataGridTextColumn Binding="{Binding task_id}" Header="task Id" Width="60"/>
+        <DataGridTextColumn Binding="{Binding task_title}" Header="task title" Width="160"/>
+        <DataGridTextColumn Binding="{Binding task_description}" Header="task description" Width="300"/>
+        <DataGridTextColumn Binding="{Binding task_date}" Header="task date" Width="100"/>
+        <DataGridTextColumn Binding="{Binding task_time_start}" Header="task time start" Width="100"/>
+        <DataGridTextColumn Binding="{Binding task_time_end}" Header="task time end" Width="100"/>
+    </DataGrid.Columns>
+</DataGrid>-->

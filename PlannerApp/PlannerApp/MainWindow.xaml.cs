@@ -35,12 +35,25 @@ namespace PlannerApp
             WyswietlNazweProfilu();
             getWeather("Wroclaw");
 
-            //Wyświetlenie danych na datagrid:
-            using (PlanerEntities _context = new PlanerEntities())
+            List<TaskMenager> TasksList = new List<TaskMenager>();
+            PlanerEntities tasks_db = new PlanerEntities();
+
+            var tasks = from d in tasks_db.Tasks
+                           select d;
+
+            foreach (var item in tasks)
             {
-                MyTasks = _context.Tasks.ToList();
+                TasksList.Add(new TaskMenager() { TaskTitle = item.task_title });
             }
-            DataGridTasks.ItemsSource = MyTasks;
+
+            UserList.ItemsSource = TasksList;
+
+            //Wyświetlenie danych na datagrid:
+            //using (PlanerEntities _context = new PlanerEntities())
+            //{
+            //    MyTasks = _context.Tasks.ToList();
+            //}
+            //DataGridTasks.ItemsSource = MyTasks;
         }
 
         void getWeather(string miasto)
@@ -117,5 +130,10 @@ namespace PlannerApp
         {
             getWeather(miasto.Text);
         }
+    }
+
+    public class TaskMenager
+    {
+        public string TaskTitle { get; set; }
     }
 }
